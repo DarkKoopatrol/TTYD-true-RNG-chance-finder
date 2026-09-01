@@ -1,0 +1,16 @@
+mod = 10000
+outcomes = [2000, 2000, 2000, 2000, 2000]
+
+rngValues = 2**15
+offset = 0
+for i in range (len(outcomes)):
+    activations, remainder = divmod(rngValues, mod)
+    remainder -= offset
+    extra = 0
+    if 0 < remainder < outcomes[i]:
+        extra = remainder
+    else:
+        activations += 1
+    numerator = outcomes[i] * activations + extra
+    print(f"Outcome {i + 1}: {numerator}/{rngValues}, {numerator / rngValues * 100}%")
+    offset += outcomes[i]
